@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@fontsource/montserrat/400.css';
+@import '@fontsource/montserrat/700.css';
+@import '@fontsource/poppins/400.css';
+@import '@fontsource/poppins/700.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/700.css';
+
+@font-face {
+  font-family: 'Raider Crusader';
+  src: url('/fonts/RaiderCrusader.woff2') format('woff2');
+  font-display: swap;
+}
+
+:root {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  body {
+    @apply antialiased bg-neutral-white font-roboto;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-montserrat font-bold;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply relative overflow-hidden px-6 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+  }
+  .btn-primary {
+    @apply bg-primary-red text-white hover:bg-red-600;
+  }
+  .section-fade {
+    @apply opacity-0 translate-y-4 transition-all duration-700;
+  }
+  .section-fade.in-view {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+.parallax-bg {
+  @apply fixed top-0 left-0 w-full h-full -z-10;
+  background-attachment: fixed;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+}
+
+/* Optimize for mobile performance */
+@media (max-width: 768px) {
+  .parallax-bg {
+    background-attachment: scroll;
+  }
+}
+
+/* Loading optimization */
+img {
+  content-visibility: auto;
+}
+
+/* Reduce CLS */
+img, video {
+  @apply aspect-video object-cover;
+}
